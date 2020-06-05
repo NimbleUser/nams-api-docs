@@ -1,0 +1,23 @@
+{
+  "name": "nams-api-docs",
+  "private": true,
+  "description": "Nimble AMS product api docs",
+  "scripts": {
+    "docs:generate": "apexdocs-generate -s /Users/jjuby/workspace/sfdx-workspace/docsplay/sfdx-source/nu/api/payments -t docs/public-apis -p public -g docsify -c docs/apidocsconfig.json",
+    "docs:serve": "npm run docs:generate && docsify serve docs"
+  },
+  "author": "nimbleams",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:NimbleUser/nams-api-docs.git"
+  },
+  "engines": {
+    "node": ">= 10.13.0",
+    "npm": ">= 6.5.0"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@cparra/apexdocs": "^1.9.3",
+    "docsify-cli": "^4.4.0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "root": "public-apis",
+  "defaultGroupName": "PaymentsApi",
+  "sourceLanguage": "apex",
+  "content": {
+    "startingHeadingLevel": 2,
+    "includeAuthor": false,
+    "includeDate": false,
+    "injections": {
+      "doc": {
+        "method": {
+          "onInit": [
+            "<!-- panels:start -->",
+            "<!-- div:left-panel -->"
+          ],
+          "onEnd": [
+            "<!-- panels:end -->"
+          ],
+          "onBeforeExample": [
+            "<!-- div:right-panel -->"
+          ]
+        }
+      }
+    }
+  }
+}

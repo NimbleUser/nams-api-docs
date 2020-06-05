@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nimble AMS</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicon-16x16.png"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Nimble AMS Technical Documentation" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/docsify-gifcontrol@0/dist/docsify-gifcontrol.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap"
+    />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      window.$docsify = {
+        alias: {
+          '/.*/public-apis/_sidebar.md': '/public-apis/_sidebar.md',
+          '/.*/_navbar.md': '/_navbar.md'
+        },
+        name:
+          '<img src="assets/logo.png" data-origin="assets/logo.png" alt="Nimble AMS logo" class="sidebar-logo">Nimble AMS',
+        repo: 'https://bitbucket.org/nimbleams/nu-dx-org',
+        loadSidebar: true,
+        loadNavbar: true,
+        maxLevel: 4,
+        subMaxLevel: 2,
+        auto2top: true,
+        pagination: {
+          crossChapter: true,
+          crossChapterText: true
+        },
+        copyCode: {
+          buttonText: 'Copy',
+          errorText: 'Error',
+          successText: 'Copied'
+        },
+        search: {
+          paths: 'auto',
+          placeholder: 'Search',
+          noData: 'No results.'
+        }
+      };
+    </script>
+    <!-- Docsify core -->
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+
+    <!-- Additional Docsify plugins -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1/dist/docsify-tabs.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify-example-panels@1/dist/docsify-example-panels.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify-gifcontrol@0/dist/docsify-gifcontrol.js"></script>
+
+    <!-- Prismjs syntax highlighting -->
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-css.min.js"></script>
+
+    <!-- Custom scripts -->
+    <script src="assets/prism-apex.js"></script>
+    <script src="assets/docsify-bitbucket-corner.js"></script>
+    <script src="assets/docsify-better-sidebar.js"></script>
+  </body>
+</html>
