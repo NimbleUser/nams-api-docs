@@ -3,7 +3,7 @@
   "private": true,
   "description": "Nimble AMS product api docs",
   "scripts": {
-    "docs:generate": "apexdocs-generate -s /Users/jjuby/workspace/sfdx-workspace/docsplay/sfdx-source/nu/api/payments -t docs/public-apis -p public -g docsify -c docs/apidocsconfig.json",
+    "docs:generate": "apexdocs-generate -s /Users/jjuby/workspace/sfdx-workspace/docsplay/sfdx-source/nu/api/payments -t docs/nu/public-apis -p public -g docsify -c docs/apidocsconfig.json",
     "docs:serve": "npm run docs:generate && docsify serve docs"
   },
   "author": "nimbleams",

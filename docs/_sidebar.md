@@ -1,8 +1,3 @@
-- API
-
-  - [Public](/public-apis/)
-  - [Global](/global-apis/)
-
-- Recipes
-
-  - [Payments](/recipes/payments.md)
+- Packages
+  - [NU](/nu/)
+  - [NAMS](/nams/)

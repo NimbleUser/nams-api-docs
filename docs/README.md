@@ -1,3 +1,3 @@
 # Overview
 
-Nimble AMS core package.
+Browse API documentation by package namespace.
