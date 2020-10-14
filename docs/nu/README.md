@@ -1,3 +1,3 @@
-# Overview
+# NU Package
 
-Nimble AMS core package.
+API documentation and recipes for the core NU package.

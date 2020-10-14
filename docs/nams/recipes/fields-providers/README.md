@@ -57,6 +57,6 @@ Go to
 * Locate the `Field Provider` type and click on `Manage Records`
 * Click `New`
 
-![Field Provider Record](assets/fpcmt.png)
+![Field Provider Record](assets/fpcmt.PNG)
 
 Here you can specify the field that you want to always be queried.

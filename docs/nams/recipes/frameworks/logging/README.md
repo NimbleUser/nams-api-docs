@@ -96,4 +96,4 @@ Since logs and operations can accumulate fairly quickly, the Nimble AMS Logging 
 
 To manually configure the amount of time logs will be kept for, navigate to the Custom Metadata Type `Log Configuration`, and you can modify the specified log level to be deleted with the field *DaysBeforeDeletion__c*
 
-![Log Configuration](/assets/log_configurations.png)
+![Log Configuration](/assets/log_configurations.PNG)

@@ -70,7 +70,12 @@
           placeholder: 'Search',
           noData: 'No results.'
         },
-        coverpage: true
+        coverpage: true,
+        onlyCover: true,
+        toc: {
+          tocMaxLevel: 5,
+          target: 'h2, h3, h4'
+        },
       };
     </script>
     <!-- Docsify core -->
@@ -83,6 +88,7 @@
     <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1/dist/docsify-tabs.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify-example-panels@1/dist/docsify-example-panels.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify-gifcontrol@0/dist/docsify-gifcontrol.js"></script>
+    <script src="//unpkg.com/docsify-plugin-toc"></script>
 
     <!-- Prismjs syntax highlighting -->
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
