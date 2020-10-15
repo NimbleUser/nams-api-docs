@@ -1,3 +1,5 @@
-- Packages
-  - [NU](/nu/)
-  - [NAMS](/nams/)
+- [Home](/README.md)
+- [Getting Started](/getting-started.md)
+- [Development](/development/)
+- [Cookbook](/cookbook/)
+- [API Reference](/api-reference/)
