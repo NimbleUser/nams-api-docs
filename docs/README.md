@@ -1,4 +1,3 @@
-<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 <p align="center">
     <img alt="Nimble AMS Logo" width="400px" src="_media/cb-nimbleams-logo.png" />
 </p>

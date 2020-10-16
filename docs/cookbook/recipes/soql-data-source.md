@@ -1,6 +1,6 @@
 # SOQL Data Source
 
-# Background
+## Background
 
 Data Sources tell Cards in Community Hub what data to retrieve and display for end user interaction. Historically, our Data Sources have been Apex driven. That meant significant development work was needed to create them, or adjust them. With the advent of SOQL Data Sources we can base Data Sources off of **`NU__Query__c`** records, allowing for point-and-click Data Source creation. This means that the entire process of creating basic cards to display data in Community Hub can be fully accomplished without the need for a technical development resource.
 
@@ -8,7 +8,7 @@ This guide will walk you through the point-and-click creation of a Data Source u
 
 To create an Apex data source, see [Data Sources](https://help.nimbleams.com/data-source-setup-6178097.html).
 
-# A Basic Point-and-Craig Example
+## A Basic Point-and-Craig Example
 
 For our example scenario, we have a very simple need. We want to display a record list card, showing all accounts whose first name is "Craig".
 
@@ -21,7 +21,7 @@ To complete this process we will need four things:
 
 Let's go through them one by one, using that example to show you how to accomplish the goal.
 
-## Query Record
+### Query Record
 
 Create a new **`NU__Query__c`** record. Here's ours by way of example:
 
@@ -41,7 +41,7 @@ The **`NU__Query__c`** record will be the basis of your data source – the 
 
 !> **A Note About Permissions.** You will need to ensure that the **Read** permission is set on the **`NU__Query__c`** object for the Community Hub Login User profile. This allows Community Hub pages to access the data needed to execute the query.
 
-## Data Source Custom Setting
+### Data Source Custom Setting
 
 Create a new **Data Source** custom setting record (/apex/nc__datasourceconfiguration). Here's ours as an example:
 
@@ -53,11 +53,11 @@ Context|AccountsLikeCraig
 
 !> **NOTE** The **`NU__Query__c.NU__Context__c`** field is set to the **Name** of our **`NU__Query__c`** record. The **`NC.SOQLDataSource`** class assigned to this record assumes that the **`NU__Context__c`** field contains that name and will locate the query based upon it.
 
-## Field Set
+### Field Set
 
 Define a Field Set against the object your query/data source acts against. Ours just includes the Name and PersonEmail fields. This Field Set will determine what displays on the card. You could also specify an existing Field Set on the **`NC__Card__c`** record if you want to reuse an existing Field Set.
 
-## Card Custom Setting
+### Card Custom Setting
 
 Go to **`/apex/nc__pageconfiguration`** on your org and put a new card on whatever page you want (we chose Profile Snapshot). Include your new Data Source and Field Set:
 
@@ -65,7 +65,7 @@ Go to **`/apex/nc__pageconfiguration`** on your org and put a new card on what
 
 Save the record and voila! Your new Data Source's records will display on the page where your card lives. Try adjusting your query so that it reads `FirstName LIKE "Matt%"` and reloading the page. Now you see all names that start with "Matt", including Matty and Matthew – and all it took was a few clicks!
 
-# Filtering by Current Account - Outstanding Orders
+## Filtering by Current Account - Outstanding Orders
 
 The SOQL Data Source also supports a merge field for the logged in user's account. The syntax for the merge field is **{!CurrentAccountId}**. For this example, we will walk through replacing the Data Source on the My Orders page with the SOQL Data Source to show an individual's outstanding orders.
 
@@ -75,7 +75,7 @@ To complete this process, we will:
 2. Create a **`NC__DataSource__c`** record that uses the SOQL Data Source.
 3. Update the Outstanding Invoices card to use the SOQL Data Source.
 
-## Query Record
+### Query Record
 
 Create a new **Query__c** record. Here's ours by way of example:
 
@@ -89,7 +89,7 @@ ORDER BY|"NU\_\_InvoiceDueDate\_\_c NULLS LAST
 LIMIT|"50
 Sharing Mode|User
 
-## Data Source Custom Setting
+### Data Source Custom Setting
 
 Create a new **Data Source** custom setting record (/apex/nc__datasourceconfiguration). Again, here's ours as an example:
 
@@ -99,7 +99,7 @@ Name|OutstandingInvoicesSoqlDataSource
 Class|NC.SOQLDataSource
 Context|OutstandingInvoices
 
-## Update Outstanding Invoices Card
+### Update Outstanding Invoices Card
 
 Now we will update the Outstanding Invoices Card on the My Orders page to use our new Data Source custom setting.
 
@@ -110,7 +110,7 @@ Now we will update the Outstanding Invoices Card on the My Orders page to use ou
 
 Now, navigate to the **My Orders** page in Community Hub and see your point-and-click Data Source at work!
 
-# Filtering by URL Query String Parameters
+## Filtering by URL Query String Parameters
 
 The SOQL Data Source class also supports passing [URL query string parameters](https://en.wikipedia.org/wiki/Query_string) through to **`NU__Query__c`** records for highly flexible record filtering. We utilize a simple [Visualforce syntax](https://developer.salesforce.com/docs/atlas.en-us.pages.meta/pages/pages_quick_start_display_field_values.htm) of sending parameter values through to SOQL queries.
 
@@ -124,7 +124,7 @@ To make our dreams come true we will follow these steps:
 4. Add a **read only field set card** to the page we'd like to display the record on.
 5. Pass in the Id of the registration we want to display via a URL query string parameter.
 
-## Query Record
+### Query Record
 
 Create a new **`NU__Query__c`** record. Here's ours by way of example:
 
@@ -146,7 +146,7 @@ Sharing Mode|User
 
 > **Mix & Match** You can have **more than one** query string parameter in your query record. You can also utilize **current account filtering** at the same time as query string parameters!
 
-## Data Source Custom Setting
+### Data Source Custom Setting
 
 Create a new **Data Source** custom setting record (/apex/nc__datasourceconfiguration). Again, here's ours as an example:
 
@@ -156,7 +156,7 @@ Name|SingleRegistrationSoqlDataSource
 Class|NC.SOQLDataSource
 Context|SingleRegistrationById
 
-## Field Set
+### Field Set
 
 Create a new field set named **SingleRegistrationDisplay** on the `NU__Registration2__c` object utilizing the following fields to output the event name, event date and registration status on a card.
 
@@ -164,7 +164,7 @@ Create a new field set named **SingleRegistrationDisplay** on the `NU__Regist
 - `znu__EventStartDate2__c`
 - `znu__Status__c`
 
-## Add a Card
+### Add a Card
 
 Utilizing the /apex/nc__pageconfiguration page, add a new **Read Only Field Set** card to the page of your choosing. Follow these values as an example:
 
@@ -177,7 +177,7 @@ Data Source|SingleRegistrationSoqlDataSource
 Field Set|SingleRegistrationDisplay
 Heading Label|LabelOfYourChoiceHere
 
-## Pass Query String Data to the Page
+### Pass Query String Data to the Page
 
 Since we specified "rid" as the registration Id in our query record, that will be where we want to plug in the Id of the registration to the URL query string of our page. Let's say as an example, the base URL to our page in Community Hub is as follows:
 
@@ -199,7 +199,7 @@ If you want to restrict the access of registration records by a specific custome
 
 Incorrect record Ids e.g. an incorrect type of record, incorrectly formatted Id etc. will result in an **exceptional circumstance** which will cause a page error.
 
-# Technical Jargon
+## Technical Jargon
 
 Behind the scenes, there's a lot of magic going on in between records of various types between both Community Hub and Nimble AMS. The diagram below illustrates how data flows between various processes, packages, objects and records behind the scenes to make it all come together.
 

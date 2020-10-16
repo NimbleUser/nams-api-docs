@@ -1,30 +1,30 @@
 # AutoCompleteSearch Components
 
-# Background
+## Background
 
 To keep lookup fields functional, searchable, customizable, and in line with the Nimble AMS look-and-feel we have created the **AutoCompleteSearch** **Component**, both for AMS and for Community Hub.
 
-## Diagram
+### Diagram
 
 This is the diagram for the AMS implementation of the **AutoCompleteSearch Component**. The Community Hub version works in much the same way.
 
 ![AutoCompleteSearch%20Components%208b578daf187a44d6a781f490e179dd6e/Untitled.png](AutoCompleteSearch%20Components%208b578daf187a44d6a781f490e179dd6e/Untitled.png)
 
-# AMS
+## AMS
 
 **AutoCompleteSearch** in AMS allows for ad-hoc filtering of any SObject type by the user.
 
-## Example
+### Example
 
 Let's look at the example of filtering merchandise during the order process. We want the user to be able to search for individual pieces of merchandise AND for that search box to react with intelligent auto-completion.
 
-## Code Sample
+### Code Sample
 
 To start we need to include our **AutoCompleteSearch** script in the `OrderPurchaseMerchandise` component. See lines 3-8 below:
 
 **OrderPurchaseMerchandise.component**
 
-```java
+```html
 <apex:component controller="OrderPurchaseMerchandiseController" allowDML="true">
     <apex:stylesheet value="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
     <apex:includeScript value="{!$Resource.AutoCompleteSearch}" />
@@ -44,7 +44,7 @@ Next we need to actually put our component onto the page. The following (or some
 
 **OrderPurchaseMerchandise.component**
 
-```java
+```html
 <apex:inputText value="{!SearchQuery}" id="SearchField"
         onkeypress="return orderProductSearchKeyPress(event);">
     <c:AutoCompleteSearch FieldId="{!$Component.SearchField}" ObjectName="{!ObjectName}"
@@ -65,7 +65,7 @@ SearchResultImplementation|The implementation of IAutoCompleteSearchResult to 
 AdditionalFields|Any additional fields that should be queried against.
 AdditionalData|A comma-delimited string of additional parameters.
 
-## Extensibility
+### Extensibility
 
 The above allows us to utilize the default behavior of the **AutoCompleteSearch Component**, but what if we had more specific needs? The default `IAutoCompleteSearchResult` implementation (`DefaultAutoCompleteSearchResult`, appropriately enough) just returns a list of matching records, selected and sorted by their Name field. Here's a quick alternate implementation that only selects records with status 'Active'.
 
@@ -126,11 +126,11 @@ public with sharing class AutoCompleteSearchResultActiveRecords implements NC.IA
 
 A simple example, and thus very similar to the default implementation, but provide that new class name when instantiating the component and only active merchandise products will show up in the order process' lookup.
 
-# Community Hub
+## Community Hub
 
 **AutoCompleteSearch** in Community Hub allows for ad-hoc filtering of any record type by the user from within a FieldSet component. We also added some configuration options so customers could get more out of the functionality via point-and-click.
 
-## Example (low-level)
+### Example (low-level)
 
 Before we begin let's see how the **AutoCompleteSearch Component** is added to `FieldSet.component`:
 
@@ -167,7 +167,7 @@ resultsLimit|The number of search results to show to the user. Can be configur
 
 Note that all these parameters are provided dynamically based on point-and-click Configurations explained below (Configuration section).
 
-## Example (point-and-click)
+### Example (point-and-click)
 
 But all that low-level work has already been done, at least for field set components! Let's take a look at how we would add a lookup field to a page, say **Edit My Profile**.
 
@@ -179,13 +179,13 @@ But all that low-level work has already been done, at least for field set compon
 
 Now click Save. You're done! Log in to Community Hub and browse to **Edit My Profile**, there is now a lookup field keyed to Account.Name on the page! That field is using the default settings though: it only searched on name, it shows 10 results, it has no additional search criteria, and it works the same no matter what card or field it exists on. We can improve that with some configuration!
 
-## Configuration
+### Configuration
 
 The Community Hub **AutoCompleteSearch Component** is configured via AutoCompleteSearch Configuration custom metadata types. Browse to **Setup > Custom Metadata Types > AutoCompleteSearch Configuration** and click **Manage**.
 
 ![AutoCompleteSearch%20Components%208b578daf187a44d6a781f490e179dd6e/Untitled%203.png](AutoCompleteSearch%20Components%208b578daf187a44d6a781f490e179dd6e/Untitled%203.png)
 
-### **Information**
+#### **Information**
 
 This is identifying information about this configuration, as well as the controller it will use.
 
@@ -195,7 +195,7 @@ Label|REQUIRED|"The name of this configuration. Try to make it something descrip
 AutoCompleteSearch Configuration Name|REQUIRED|The auto-generated API name of this configuration.
 Controller|OPTIONAL|The name of the class that retrieves records for this configuration. Should be an implementation of IAutoCompleteSearchResult to ensure the required methods are defined. If not specified the default record querier class will be used.
 
-### **Filters**
+#### **Filters**
 
 Filters determine which situations a given configuration will apply to. Nimble AMS will use whichever is better suited to the lookup field's placement. For example, say you have two configurations for Account: one with no filters beyond the object type and one with the field specified. For a lookup against that field the second configuration would be used. But for any other configuration the Account-only configuration would be used.
 
@@ -207,7 +207,7 @@ Card Name|OPTIONAL|The card this filter will apply to.|"IndividualNameAndTitle|�
 
 Field Name will be preferred over Card name when Nimble AMS determines which configuration to use. Keep that in mind when creating a multi-layered configuration.
 
-### **Query Settings**
+#### **Query Settings**
 
 Query Settings determine what this configuration will actually *do*.
 
@@ -218,7 +218,7 @@ Primary Field|OPTIONAL|"The main field to be searched against and displayed to t
 Field Set|OPTIONAL|The name of a field set to be used as a source of additional fields to be searched against.|FieldSetName
 Additional Filters|OPTIONAL|A comma-delimited string of WHERE clauses to incorporate into the search query.|"NU\_\_Status\_\_c = 'Active'
 
-## Extensibility
+### Extensibility
 
 Just like in Nimble AMS clients and consultants can extend the **AutoCompleteSearch** **Component** via code. It's almost exactly the same, actually! Just write a class that implements `IAutoCompleteSearchResult` and specify it in any number of relevant configurations. In this way you can have custom extensibility configured ad-hoc for individual cards, record types or fields – or all of the above.
 

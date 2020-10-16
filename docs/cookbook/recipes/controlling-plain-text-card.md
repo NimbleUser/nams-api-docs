@@ -1,28 +1,28 @@
 # Controlling a Plain Text Card via a Data Source and Controller
 
-# Background
+## Background
 
 It is possible to define the contents of a Plain Text card using the results of a Data Source.
 
-## Example
+### Example
 
 Often, a CH user should see different messages based on the existence of records. For example, if they have not provided a disclosure as part of an application, they should see a message asking them to complete a disclosure. If they *have* provided a disclosure, they should see a message asking them if they want to review the disclosure.
 
-## What the user sees when...
+### What the user sees when...
 
-### **...user has an active disclosure**
+#### **...user has an active disclosure**
 
 This is what the user will see when they have an active disclosure:
 
 ![Controlling%20a%20Plain%20Text%20Card%20via%20a%20Data%20Source%20an%2007813e9501a743b09c4390f249ac8bcd/Untitled.png](Controlling%20a%20Plain%20Text%20Card%20via%20a%20Data%20Source%20an%2007813e9501a743b09c4390f249ac8bcd/Untitled.png)
 
-### **...user does NOT have an active disclosure**
+#### **...user does NOT have an active disclosure**
 
 This is what the user will see when they do not have an active disclosure:
 
 ![Controlling%20a%20Plain%20Text%20Card%20via%20a%20Data%20Source%20an%2007813e9501a743b09c4390f249ac8bcd/Untitled%201.png](Controlling%20a%20Plain%20Text%20Card%20via%20a%20Data%20Source%20an%2007813e9501a743b09c4390f249ac8bcd/Untitled%201.png)
 
-## Card Type Setup
+### Card Type Setup
 
 Create a card type using the Apex Controller
 
@@ -36,7 +36,7 @@ Controller Name: OpportunityDisclosureCardTypeController
 
 ![Controlling%20a%20Plain%20Text%20Card%20via%20a%20Data%20Source%20an%2007813e9501a743b09c4390f249ac8bcd/Untitled%202.png](Controlling%20a%20Plain%20Text%20Card%20via%20a%20Data%20Source%20an%2007813e9501a743b09c4390f249ac8bcd/Untitled%202.png)
 
-## Card Setup
+### Card Setup
 
 Name: OpportunityDisclosureCard
 
@@ -54,7 +54,7 @@ Labels
 
 ![Controlling%20a%20Plain%20Text%20Card%20via%20a%20Data%20Source%20an%2007813e9501a743b09c4390f249ac8bcd/Untitled%205.png](Controlling%20a%20Plain%20Text%20Card%20via%20a%20Data%20Source%20an%2007813e9501a743b09c4390f249ac8bcd/Untitled%205.png)
 
-### **Data Source**
+#### **Data Source**
 
 This controller uses a custom Apex data source, which is why the context is blank. To use the more typical NC SOQL Data Source, create a Query record and reference it here. Assign your data source to the Card.
 
@@ -85,7 +85,7 @@ global override Boolean getUseDescriptionLabel() {
 }
 ```
 
-## Controller Code
+### Controller Code
 
 The controller for the Card that queries the data source and then sets the contents based upon the results. This example contains more complex logic than is required to implement the control over the text content
 
@@ -246,6 +246,6 @@ public without sharing class OpportunityDisclosureCardTypeController extends NC.
 
 !> Make sure to add a unit test for the controller. The bolded sections of the descriptions of the cards in the screenshots are links. It is possible for your card to redirect you to another page on Community Hub. In this case the links bring the user to a page where they can review or create a disclosure.
 
-# Conclusion
+## Conclusion
 
 You can use advanced logic to control instructions and information shown to a User on a Plain Text card.

@@ -22,5 +22,7 @@ Understand how our core frameworks work and how to consume our APIs.
 
 [Chapters API](/development/recipes/chapters/)
 
+[Hierarchy Service](/development/recipes/hierarchy/)
+
 [Payments API](/development/recipes/payments/)
 

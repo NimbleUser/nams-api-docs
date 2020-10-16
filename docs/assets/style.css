@@ -557,11 +557,18 @@ article ol > li:before {
 .grid-cols-2 {
   grid-template-columns: repeat(2,minmax(0,1fr));
 }
+.grid-cols-3 {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+}
 .place-items-center {
   place-items: center;
 }
 .grid {
   display: grid;
+}
+.gap-4 {
+  grid-gap: 1rem;
+  gap: 1rem;
 }
 .shadow-lg {
   box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
@@ -582,6 +589,9 @@ article ol > li:before {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+.h-56 {
+  height: 14rem;
 }
 .text-xl {
   font-size: 1.25rem;

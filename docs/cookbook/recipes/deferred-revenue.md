@@ -2,7 +2,7 @@
 
 ## Background
 
-The Deferred Revenue has a number of technical extension points to the functionality which are outlined in this document.
+The Deferred Revenue feature has a number of technical extension points to the functionality which are outlined in this document.
 
 ## Custom Recognition Date Generation
 
