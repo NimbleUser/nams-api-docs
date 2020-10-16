@@ -43,7 +43,7 @@
   </div>
   <div class="max-w-sm rounded overflow-hidden shadow-lg">
     <div class="px-6 py-4 h-56">
-      <div class="font-bold text-xl mb-2"><a href="#/nams/">Apex Style Guide</a></div>
+      <div class="font-bold text-xl mb-2"><a href="https://nimbleuser.github.io/apex-style-guide/">Apex Style Guide</a></div>
       <p class="text-gray-700 text-base">
         The complete definition of Nimble AMS coding standards for source code in the Apex Programming Language.
       </p>
