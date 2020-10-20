@@ -1,8 +1,5 @@
-- API
-
-  - [Public](/public-apis/)
-  - [Global](/global-apis/)
-
-- Recipes
-
-  - [Payments](/recipes/payments.md)
+- [Home](/README.md)
+- [Getting Started](/getting-started.md)
+- [Development](/development/)
+- [Cookbook](/cookbook/)
+- [API Reference](/api-reference/)
