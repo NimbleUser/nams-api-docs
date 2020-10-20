@@ -39,7 +39,7 @@ Allows for the creation of [PersonBase](api-reference/nams/public-apis/AccountsA
 ### [AccountsApiContactRetriever](api-reference/nams/public-apis/AccountsApi/AccountsApiContactRetriever.md)
 
 
-In charge of retrieving Contact data and returning the corresponding {@link ContactBase} wrappers.
+In charge of retrieving Contact data and returning the corresponding Contact wrappers.
 
 
 
