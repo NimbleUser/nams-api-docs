@@ -128,11 +128,13 @@ If there are any errors during this process, a `PaymentsApiException` will be ra
 
 <!-- tabs:end -->
 
+<!-- div:title-panel -->
+
 ## Refund a payment
 
 Refunding a payment consists of three individual steps:
-* Refund an existing payment
 * Generate a refund payment that reverts the existing payment
+* Processing the refund payment
 * Apply and persist the changes
 
 Each one of these steps are performed individually to give the flexibility of deciding when, how, and even
@@ -140,41 +142,9 @@ if a step should be performed.
 
 <!-- div:title-panel -->
 
-### 1. Refund a payment
+### 1. Generate refund payments
 
 <!-- div:left-panel -->
-
-This step consists of executing whatever is necessary to mark a payment as refunded. In the case
-of a credit card payment, for example, this includes making an API call to the Payment Gateway to
-mark the payment as refunded.
-
-!> Be aware this might mean the refunding step won't do anything for certain types of simple payments like cash of check. It is still recommended going through this step no mater the type of payment being refunded, since there is some validation done behind the scenes even for simple payment types.
-
-To refund a payment the only thing that you need is the Id of the `Payment` record you want to refund.
-
-<!-- div:right-panel -->
-
-[code](../../samples/payments/PaymentsApiDocsSamples.cls ':include :type=code apex :fragment=refund-a-payment')
-
-<!-- div:title-panel -->
-
-### 2. Parse responses
-
-<!-- div:left-panel -->
-
-Once you have refunded the payment, parse the responses to get the list of `PaymentBase` for which refund was successful.
-
-<!-- div:right-panel -->
-
-[code](../../samples/payments/PaymentsApiDocsSamples.cls ':include :type=code apex :fragment=refund-a-payment-parse-response')
-
-<!-- div:title-panel -->
-
-### 3. Generate refund payments
-
-<!-- div:left-panel -->
-
-Now that you have the payments that were successfully refunded, let's create refund payments for them.
 
 A refund payment is a new `PaymentBase` that represents the reversed version of the original payment. It has
 the same information as the original, but with the opposite amount. This payment will eventually be tied to the same Order Item
@@ -186,7 +156,23 @@ as the original, and will have its own transactions so that the accounting data 
 
 <!-- div:title-panel -->
 
-### 4. Apply and persist the changes
+### 2. Process the refund payments
+
+<!-- div:left-panel -->
+
+This step consists of executing whatever is necessary to mark a payment as refunded. In the case
+of a credit card payment, for example, this includes making an API call to the Payment Gateway to
+mark the payment as refunded.
+
+!> Be aware this might mean the refunding step won't do anything for certain types of simple payments like cash of check. It is still recommended going through this step no matter the type of payment being refunded, since there is some validation done behind the scenes even for simple payment types.
+
+<!-- div:right-panel -->
+
+[code](../../samples/payments/PaymentsApiDocsSamples.cls ':include :type=code apex :fragment=refund-a-payment-process')
+
+<!-- div:title-panel -->
+
+### 3. Apply and persist the changes
 
 <!-- div:left-panel -->
 
@@ -195,10 +181,10 @@ refund payments, but also make sure that transactions for the refunds are create
 
 Luckily we don't have to worry about the details, instead we can apply our refund payments and everything will be taken care of for us.
 
+?> Because the generated refund payment contains the reversing payment lines, no strategy is needed.
+
 <!-- div:right-panel -->
 
 [code](../../samples/payments/PaymentsApiDocsSamples.cls ':include :type=code apex :fragment=refund-a-payment-apply')
-
-<!-- div:title-panel -->
 
 <!-- panels:end -->

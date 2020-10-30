@@ -114,32 +114,28 @@ private class PaymentsApiDocsSamples {
         Payment__c existingPayment = PaymentTestData.Instance.asCash(entityId).withAmount(10).insertRecord();
         PaymentLineTestData.Instance.withPayment(existingPayment.Id).withAmount(10).insertRecord();
 
-        /// [refund-a-payment]
-        List<RefundResponse> responses = PaymentsApi.v1.refundService()
-                .refund(new Set<Id> { existingPayment.Id });
-        /// [refund-a-payment]
-
-        /// [refund-a-payment-parse-response]
-        // Parse the RefundResponse list to gather information about the processing.
-        List<PaymentBase> successfullyRefundedPayments = new List<PaymentBase>();
-        for (RefundResponse response : responses) {
-            if (response.isSuccess()) {
-                // RefundResponse objects contain a reference to the original `PaymentBase` for which
-                // refunding was attempted.
-                successfullyRefundedPayments.add(response.getPayment());
-            }
-        }
-
-        if (successfullyRefundedPayments.isEmpty()) {
-            // If refunding was unsuccessful you can see why by calling the `getError()` method on the response.
-            System.debug(responses[0].getError());
-        }
-        /// [refund-a-payment-parse-response]
+        Id paymentId = existingPayment.Id;
 
         /// [refund-a-payment-generate-refunds]
+        // First retrieve the payment with details and lines.
+        PaymentBase paymentToRefund = PaymentsApi.v1.paymentRetriever()
+            .with(new PaymentWithPaymentDetailsPlugin())
+            .with(new PaymentsWithPaymentLinesPlugins())
+            .getById(paymentId);
+
+        // Generate the refunding payment.
         List<PaymentBase> refundPayments = PaymentsApi.v1.refundService()
-                .generateRefundPayments(successfullyRefundedPayments);
+            .generateRefundPayments(new List<PaymentBase> { paymentToRefund });
         /// [refund-a-payment-generate-refunds]
+
+        /// [refund-a-payment-process]
+        try {
+            PaymentsApi.v1.service().process(refundPayments);
+        } catch (PaymentsApiException e) {
+            // You can use e.getPayment() to get the
+            // payment that raised the exception.
+        }
+        /// [refund-a-payment-process]
 
         /// [refund-a-payment-apply]
         PaymentsApi.v1.applier().apply(refundPayments);
