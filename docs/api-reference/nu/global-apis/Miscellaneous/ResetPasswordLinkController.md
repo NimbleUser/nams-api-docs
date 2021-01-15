@@ -1,0 +1,5 @@
+# ResetPasswordLinkController class
+
+Deprecated.
+
+---

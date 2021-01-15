@@ -1,0 +1,2 @@
+# HeaderComponentController class
+---
