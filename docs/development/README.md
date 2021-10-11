@@ -12,6 +12,8 @@ Understand how our core frameworks work and how to consume our APIs.
 
 [Persistence](/development/recipes/persistence/)
 
+[REST](/development/recipes/rest/)
+
 [Triggers](/development/recipes/triggers/)
 
 ## APIs
@@ -25,4 +27,3 @@ Understand how our core frameworks work and how to consume our APIs.
 [Hierarchy Service](/development/recipes/hierarchy/)
 
 [Payments API](/development/recipes/payments/)
-

@@ -16,7 +16,7 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@cparra/apexdocs": "^1.9.3",
-    "docsify-cli": "^4.4.0"
+    "@cparra/apexdocs": "^1.13.4",
+    "docsify-cli": "^4.4.3"
   }
 }
