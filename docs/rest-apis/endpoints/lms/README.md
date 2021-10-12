@@ -5,12 +5,14 @@ The LMS REST API is comprised of the following endpoints:
 - `/lms/v1/products`
 - `/lms/v1/purchases`
 
-## Products Route
+## Routes
+
+### Products Route
 
 The products route supports retrieving LMS eligible products -
 products where the "Sync with LMS" checkbox is checked.
 
-### All LMS Products
+#### All LMS Products
 
 All products can be retrieved by calling `/products` through a
 `GET` request.
@@ -40,15 +42,20 @@ Sample response:
 ]
 ```
 
-### LMS Products by Last Updated Date
+#### LMS Products by Last Updated Date
 
 To filter the products being retrieved to those only updated
 since a specific date, you can provide a `lastUpdated` URL
-parameter in the request to the `/products` endpoint. The format
-of the date should be like: `2021-09-21 01:02:03`.
-Example: `/products?lastUpdated=2021-09-21 01:02:03`
+parameter in the request to the `/products` endpoint.
 
-### Single LMS Product
+Use the `yyyy-MM-ddTHH:mm:ss.SSS+/-HH:mm` or `yyyy-MM-ddTHH:mm:ss.SSSZ` format.
+
+Example: `/products?lastUpdated=2021-10-10T07:00:00Z`
+
+ℹ️ [More info](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_valid_date_formats.htm)
+on Salesforce Datetime formatting for REST.
+
+#### Single LMS Product
 
 To retrieve a single product, you can provide the product ID in the URL
 path: `/products/001...` (where `001...` is a Product record ID).
@@ -64,11 +71,11 @@ Sample response:
 }
 ```
 
-## Purchases Route
+### Purchases Route
 
 The purchases route supports retrieving purchases made for LMS products.
 
-### All LMS Purchases
+#### All LMS Purchases
 
 All purchases can be retrieved by calling `/purchases` through a
 `GET` request.
@@ -104,15 +111,20 @@ Sample response:
 ]
 ```
 
-### LMS Purchases by Last Updated Date
+#### LMS Purchases by Last Updated Date
 
 To filter the purchases being retrieved to those only updated
 since a specific date, you can provide a `lastUpdated` URL
-parameter in the request to the `/purchases` endpoint. The format
-of the date should be like: `2021-09-21 01:02:03`.
-Example: `/purchases?lastUpdated=2021-09-21 01:02:03`
+parameter in the request to the `/purchases` endpoint.
 
-### Single LMS Purchase
+Use the `yyyy-MM-ddTHH:mm:ss.SSS+/-HH:mm` or `yyyy-MM-ddTHH:mm:ss.SSSZ` format.
+
+Example: `/purchases?lastUpdated=2021-10-10T07:00:00Z`
+
+ℹ️ [More info](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_valid_date_formats.htm)
+on Salesforce Datetime formatting for REST.
+
+#### Single LMS Purchase
 
 To retrieve a single purchase, you can provide the purchase ID in the URL
 path: `/purchases/002...` (where `002...` is an Order Item Line record ID).
@@ -134,7 +146,7 @@ Sample response:
 }
 ```
 
-### LMS Purchase Sync
+#### LMS Purchase Sync
 
 To update (or sync) a purchase with the AMS, you can call the
 route for a single purchase with a `POST`.
