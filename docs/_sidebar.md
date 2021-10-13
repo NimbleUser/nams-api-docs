@@ -2,4 +2,5 @@
 - [Getting Started](/getting-started.md)
 - [Development](/development/)
 - [Cookbook](/cookbook/)
+- [REST APIs](/rest-apis/)
 - [API Reference](/api-reference/)

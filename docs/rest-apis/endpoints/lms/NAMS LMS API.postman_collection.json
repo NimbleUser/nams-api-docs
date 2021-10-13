@@ -1,0 +1,959 @@
+{
+	"info": {
+		"_postman_id": "fc06eb74-8469-477c-b80f-424c56c0665c",
+		"name": "NAMS LMS API",
+		"description": "This collection contains examples, with tests, for the NAMS LMS REST API.\n\n#### Collection Variables\n* `product_id` - An LMS Product Id to verify it exists in the `/products` response.\n* `last_updated_date` - Date to use when calling the `/products` and `/purchases` endpoints for filtering by last updated date.\n* `line_id` - An LMS Line Id to verify it exists in the `/purchases` response.\n\n#### Environment Variables\nThis collection uses environment variables to authenticate against a specific Salesforce org.\n* `salesforce_url` - The Salesforce endpoint for login - test.salesforce.com, login.salesforce.com, or a custom MyDomain.\n* `username` - The username of the user to log into Salesforce with.\n* `password` - The password of the user to log into Salesforce with.\n* `key` - The OAuth Key (Client ID) for the Connected App in Salesforce used for authentication. The Connected App should have the `api` OAuth scope.\n* `secret` - The OAuth Secret for the Connected App in Salesforce used for authentication.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get Products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    const message = jsonData[0]?.message || '';",
+									"    pm.expect(pm.response.code).equal(200, message);",
+									"});",
+									"",
+									"pm.test(\"Response contains at least 1 product\", function () {",
+									"    pm.expect(jsonData.length).to.gte(1);",
+									"});",
+									"",
+									"pm.test(\"Response contains test LMS product\", function () {",
+									"    const expectedProductId = pm.variables.get(\"product_id\");",
+									"    const exists = jsonData.some((product) => product.id === expectedProductId);",
+									"    pm.expect(exists).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/products",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"nams",
+								"api",
+								"lms",
+								"v1",
+								"products"
+							]
+						},
+						"description": "Gets all Products that are marked Sync With LMS."
+					},
+					"response": [
+						{
+							"name": "Get Products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/products",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"nams",
+										"api",
+										"lms",
+										"v1",
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Sep 2021 14:35:31 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"productType\": \"On-Demand\",\n        \"name\": \"Nimble Data Fundamentals\",\n        \"id\": \"a1Z0R000002KBLPUA4\",\n        \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n    },\n    {\n        \"productType\": \"Live Webcast\",\n        \"name\": \"Nimble Ethics\",\n        \"id\": \"a1Z0R000002KBLKUA4\",\n        \"description\": \"Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.\"\n    },\n    {\n        \"productType\": \"On-Demand\",\n        \"name\": \"Nimble Communication Strategies\",\n        \"id\": \"a1Z0R000002KBLLUA4\",\n        \"description\": \"Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Products By Last Updated Date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    const message = jsonData[0]?.message || '';",
+									"    pm.expect(pm.response.code).equal(200, message);",
+									"});",
+									"",
+									"pm.test(\"Response contains at least 1 product\", function () {",
+									"    pm.expect(jsonData.length).to.gte(1);",
+									"});",
+									"",
+									"pm.test(\"Response contains test LMS product\", function () {",
+									"    const expectedProductId = pm.variables.get(\"product_id\");",
+									"    const exists = jsonData.some((product) => product.id === expectedProductId);",
+									"    pm.expect(exists).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/products?lastUpdated={{last_updated_date}}",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"nams",
+								"api",
+								"lms",
+								"v1",
+								"products"
+							],
+							"query": [
+								{
+									"key": "lastUpdated",
+									"value": "{{last_updated_date}}",
+									"description": "Filters LMS Products to those updated after this date. Date format should follow 2021-09-21 00:00:00."
+								}
+							]
+						},
+						"description": "Gets all LMS Products filtered by the `lastUpdated` date parameter provided."
+					},
+					"response": [
+						{
+							"name": "Get Products By Last Updated Date",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/products?lastUpdated={{last_updated_date}}",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"nams",
+										"api",
+										"lms",
+										"v1",
+										"products"
+									],
+									"query": [
+										{
+											"key": "lastUpdated",
+											"value": "{{last_updated_date}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Sep 2021 14:36:01 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"productType\": \"On-Demand\",\n        \"name\": \"Nimble Data Fundamentals\",\n        \"id\": \"a1Z0R000002KBLPUA4\",\n        \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Product By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    const message = jsonData[0]?.message || '';",
+									"    pm.expect(pm.response.code).equal(200, message);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/products/{{product_id}}",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"nams",
+								"api",
+								"lms",
+								"v1",
+								"products",
+								"{{product_id}}"
+							]
+						},
+						"description": "Gets a single LMS Product by its Id."
+					},
+					"response": [
+						{
+							"name": "Get Product By ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/products/{{product_id}}",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"nams",
+										"api",
+										"lms",
+										"v1",
+										"products",
+										"{{product_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Sep 2021 14:36:47 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"productType\": \"On-Demand\",\n    \"name\": \"Nimble Data Fundamentals\",\n    \"id\": \"a1Z0R000002KBLPUA4\",\n    \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Purchases",
+			"item": [
+				{
+					"name": "Get Purchases",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    const message = jsonData[0]?.message || '';",
+									"    pm.expect(pm.response.code).equal(200, message);",
+									"});",
+									"",
+									"pm.test(\"Response contains at least 1 purchase\", function () {",
+									"    pm.expect(jsonData.length).to.gte(1);",
+									"});",
+									"",
+									"pm.test(\"Response contains test LMS purchase\", function () {",
+									"    const expectedPurchaseId = pm.variables.get(\"line_id\");",
+									"    console.log(expectedPurchaseId);",
+									"    const exists = jsonData.some((purchase) => purchase.id === expectedPurchaseId);",
+									"    pm.expect(exists).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/purchases",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"nams",
+								"api",
+								"lms",
+								"v1",
+								"purchases"
+							]
+						},
+						"description": "Gets all Purchases that are tied to an LMS Product."
+					},
+					"response": [
+						{
+							"name": "Get Purchases",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/purchases",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"nams",
+										"api",
+										"lms",
+										"v1",
+										"purchases"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Sep 2021 15:02:14 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"syncStatus\": \"Success\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Communication Strategies\",\n            \"id\": \"a1Z0R000002KBLLUA4\",\n            \"description\": \"Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.\"\n        },\n        \"id\": \"a1J0R000001qKOcUAM\",\n        \"externalId\": null,\n        \"completionStatus\": \"In Progress\"\n    },\n    {\n        \"syncStatus\": \"Pending\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Data Fundamentals\",\n            \"id\": \"a1Z0R000002KBLPUA4\",\n            \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n        },\n        \"id\": \"a1J0R000001qKOdUAM\",\n        \"externalId\": null,\n        \"completionStatus\": \"In Progress\"\n    },\n    {\n        \"syncStatus\": \"Pending\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Data Fundamentals\",\n            \"id\": \"a1Z0R000002KBLPUA4\",\n            \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n        },\n        \"id\": \"a1J0R000001qJn2UAE\",\n        \"externalId\": null,\n        \"completionStatus\": \"In Progress\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Purchases By Last Updated Date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    const message = jsonData[0]?.message || '';",
+									"    pm.expect(pm.response.code).equal(200, message);",
+									"});",
+									"",
+									"pm.test(\"Response contains at least 1 purchase\", function () {",
+									"    pm.expect(jsonData.length).to.gte(1);",
+									"});",
+									"",
+									"pm.test(\"Response contains test LMS purchase\", function () {",
+									"    const expectedPurchaseId = pm.variables.get(\"line_id\");",
+									"    const exists = jsonData.some((purchase) => purchase.id === expectedPurchaseId);",
+									"    pm.expect(exists).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/purchases?lastUpdated={{last_updated_date}}",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"nams",
+								"api",
+								"lms",
+								"v1",
+								"purchases"
+							],
+							"query": [
+								{
+									"key": "lastUpdated",
+									"value": "{{last_updated_date}}",
+									"description": "Filters LMS Purchases to those updated after this date. Date format should follow 2021-09-21 00:00:00."
+								}
+							]
+						},
+						"description": "Gets all LMS Purchases filtered by the `lastUpdated` date parameter provided."
+					},
+					"response": [
+						{
+							"name": "Get Purchases By Last Updated Date",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/purchases?lastUpdated={{last_updated_date}}",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"nams",
+										"api",
+										"lms",
+										"v1",
+										"purchases"
+									],
+									"query": [
+										{
+											"key": "lastUpdated",
+											"value": "{{last_updated_date}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Sep 2021 15:02:27 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"syncStatus\": \"Pending\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Data Fundamentals\",\n            \"id\": \"a1Z0R000002KBLPUA4\",\n            \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n        },\n        \"id\": \"a1J0R000001qKOdUAM\",\n        \"externalId\": null,\n        \"completionStatus\": \"In Progress\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Purchases By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    const message = jsonData[0]?.message || '';",
+									"    pm.expect(pm.response.code).equal(200, message);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/purchases/{{line_id}}",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"nams",
+								"api",
+								"lms",
+								"v1",
+								"purchases",
+								"{{line_id}}"
+							]
+						},
+						"description": "Gets a single LMS Purchase by its Id."
+					},
+					"response": [
+						{
+							"name": "Get Purchases By ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/purchases/{{line_id}}",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"nams",
+										"api",
+										"lms",
+										"v1",
+										"purchases",
+										"{{line_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Sep 2021 15:05:54 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"syncStatus\": \"Success\",\n    \"product\": {\n        \"productType\": \"On-Demand\",\n        \"name\": \"Nimble Communication Strategies\",\n        \"id\": \"a1Z0R000002KBLLUA4\",\n        \"description\": \"Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.\"\n    },\n    \"id\": \"a1J0R000001qKOcUAM\",\n    \"externalId\": null,\n    \"completionStatus\": \"In Progress\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Purchase Sync",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).equal(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"completionStatus\": \"In Progress\",\n    \"syncStatus\": \"Success\",\n    \"externalId\": \"001931414\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/purchases/{{line_id}}",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"nams",
+								"api",
+								"lms",
+								"v1",
+								"purchases",
+								"{{line_id}}"
+							]
+						},
+						"description": "Updates LMS Purchases based on the request body that is provided. The request body should be in JSON format."
+					},
+					"response": [
+						{
+							"name": "Purchase Sync",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"completionStatus\": \"In Progress\",\n    \"syncStatus\": \"Success\",\n    \"externalId\": \"001931414\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/purchases/{{line_id}}",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"nams",
+										"api",
+										"lms",
+										"v1",
+										"purchases",
+										"{{line_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Sep 2021 17:48:15 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Length",
+									"value": "20"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const tokenUrl = pm.variables.get('salesforce_url') + '/services/oauth2/token';",
+					"const clientId = pm.variables.get('key');",
+					"const clientSecret = pm.variables.get('secret');",
+					"const username = pm.variables.get('username');",
+					"const password = pm.variables.get('password');",
+					"",
+					"const getTokenRequest = {",
+					"  method: 'POST',",
+					"  url: tokenUrl,",
+					"  body: {",
+					"      mode: 'formdata',",
+					"      formdata: [",
+					"          { key: 'grant_type', value: 'password' },",
+					"          { key: 'client_id', value: clientId },",
+					"          { key: 'client_secret', value: clientSecret },",
+					"          { key: 'username', value: username },",
+					"          { key: 'password', value: password }",
+					"      ]",
+					"  }",
+					"};",
+					"",
+					"pm.sendRequest(getTokenRequest, (err, response) => {",
+					"  const jsonResponse = response.json();",
+					"  const newAccessToken = jsonResponse.access_token;",
+					"  const instanceUrl = jsonResponse.instance_url;",
+					"",
+					"  pm.variables.set('access_token', newAccessToken);",
+					"  pm.variables.set('instance_url', instanceUrl);",
+					"});",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "instance_url",
+			"value": ""
+		},
+		{
+			"key": "product_id",
+			"value": ""
+		},
+		{
+			"key": "last_updated_date",
+			"value": ""
+		},
+		{
+			"key": "line_id",
+			"value": ""
+		}
+	]
+}
