@@ -163,7 +163,7 @@ The following properties are supported in the `POST` body:
 ## Postman Collection
 
 To easily test the API, there is a
-<a href="/rest-apis/endpoints/lms/NAMS LMS API.postman_collection.json" download>Postman collection</a>
+<a href="/nams-api-docs/rest-apis/endpoints/lms/NAMS LMS API.postman_collection.json" download>Postman collection</a>
 that can be imported into [Postman](https://www.postman.com/) for easy testing.
 
 ### Collection Variables
