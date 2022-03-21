@@ -160,6 +160,48 @@ The following properties are supported in the `POST` body:
 }
 ```
 
+## Including Custom Fields
+
+The LMS API also supports adding custom fields to all endpoints through the use of Field Sets. This includes the `GET` endpoints in addition to the purchase sync `POST` endpoint.
+
+Custom fields are added to the response payload in a `custom` object key.
+
+```json
+{
+  "productType": "On-Demand",
+  "name": "Nimble Data Fundamentals",
+  "id": "a1Z0R000002KBLPUA4",
+  "description": "Bring to the table win-win survival strategies to ensure proactive domination.",
+  "custom": {
+    "NU__UnitPrice__c": 19.99,
+    "NU__ShortName__c": "DEMAND"
+  }
+}
+```
+
+When syncing purchases back to Nimble AMS, the `custom` object key can also be included in the payload.
+These fields _must_ be included in the Field Set defined in setup.
+
+```json
+{
+  "completionStatus": "Completed",
+  "syncStatus": "Success",
+  "externalId": "001931414",
+  "custom": {
+    "CreditUnits__c": 3
+  }
+}
+```
+
+### Configuring
+
+To configure the Field Sets, you will need to first have the Setup package installed to access the setup UI.
+After installed, navigate to the NAMS Setup app. In the left hand navigation, if the LMS package is installed, you should see an LMS REST API section.
+
+![](assets/lms-setup.png)
+
+On this page, you can set the Field Set API name to include in the Products endpoints, as well as the Field Set API name to include in the Purchases endpoints.
+
 ## Postman Collection
 
 To easily test the API, there is a
