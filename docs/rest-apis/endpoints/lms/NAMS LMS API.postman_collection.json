@@ -496,7 +496,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"syncStatus\": \"Success\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Communication Strategies\",\n            \"id\": \"a1Z0R000002KBLLUA4\",\n            \"description\": \"Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.\"\n        },\n        \"id\": \"a1J0R000001qKOcUAM\",\n        \"externalId\": null,\n        \"completionStatus\": \"In Progress\"\n    },\n    {\n        \"syncStatus\": \"Pending\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Data Fundamentals\",\n            \"id\": \"a1Z0R000002KBLPUA4\",\n            \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n        },\n        \"id\": \"a1J0R000001qKOdUAM\",\n        \"externalId\": null,\n        \"completionStatus\": \"In Progress\"\n    },\n    {\n        \"syncStatus\": \"Pending\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Data Fundamentals\",\n            \"id\": \"a1Z0R000002KBLPUA4\",\n            \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n        },\n        \"id\": \"a1J0R000001qJn2UAE\",\n        \"externalId\": null,\n        \"completionStatus\": \"In Progress\"\n    }\n]"
+							"body": "[\n    {\n        \"syncStatus\": \"Success\",\n        \"status\": \"Active\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Communication Strategies\",\n            \"id\": \"a1Z0R000002KBLLUA4\",\n            \"description\": \"Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.\"\n        },\n        \"id\": \"a1J0R000001qKOcUAM\",\n        \"externalId\": null,\n        \"customerId\": \"0011900001EJGj3AAH\",\n        \"completionStatus\": \"In Progress\"\n    },\n    {\n        \"syncStatus\": \"Pending\",\n        \"status\": \"Active\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Data Fundamentals\",\n            \"id\": \"a1Z0R000002KBLPUA4\",\n            \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n        },\n        \"id\": \"a1J0R000001qKOdUAM\",\n        \"externalId\": null,\n        \"customerId\": \"0011900001EJGj3AAH\",\n        \"completionStatus\": \"In Progress\"\n    },\n    {\n        \"syncStatus\": \"Pending\",\n        \"status\": \"Active\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Data Fundamentals\",\n            \"id\": \"a1Z0R000002KBLPUA4\",\n            \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n        },\n        \"id\": \"a1J0R000001qJn2UAE\",\n        \"externalId\": null,\n        \"customerId\": \"0011900001EJGj3AAH\",\n        \"completionStatus\": \"In Progress\"\n    }\n]"
 						}
 					]
 				},
@@ -629,7 +629,140 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"syncStatus\": \"Pending\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Data Fundamentals\",\n            \"id\": \"a1Z0R000002KBLPUA4\",\n            \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n        },\n        \"id\": \"a1J0R000001qKOdUAM\",\n        \"externalId\": null,\n        \"completionStatus\": \"In Progress\"\n    }\n]"
+							"body": "[\n    {\n        \"syncStatus\": \"Pending\",\n        \"status\": \"Active\",\n        \"status\": \"Active\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Data Fundamentals\",\n            \"id\": \"a1Z0R000002KBLPUA4\",\n            \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n        },\n        \"id\": \"a1J0R000001qKOdUAM\",\n        \"externalId\": null,\n        \"customerId\": \"0011900001EJGj3AAH\",\n        \"customerId\": \"0011900001EJGj3AAH\",\n        \"completionStatus\": \"In Progress\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Purchases By Customer ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    const message = jsonData[0]?.message || '';",
+									"    pm.expect(pm.response.code).equal(200, message);",
+									"});",
+									"",
+									"pm.test(\"Response contains at least 1 purchase\", function () {",
+									"    pm.expect(jsonData.length).to.gte(1);",
+									"});",
+									"",
+									"pm.test(\"Response contains test LMS purchase\", function () {",
+									"    const expectedPurchaseId = pm.variables.get(\"line_id\");",
+									"    const exists = jsonData.some((purchase) => purchase.id === expectedPurchaseId);",
+									"    pm.expect(exists).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/purchases?customerId={{customer_id}}",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"nams",
+								"api",
+								"lms",
+								"v1",
+								"purchases"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "{{customer_id}}",
+									"description": "Filters LMS Purchases to those purchased by this customer."
+								}
+							]
+						},
+						"description": "Gets all LMS Purchases filtered by the `customerId` parameter provided."
+					},
+					"response": [
+						{
+							"name": "Get Purchases By Customer ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/nams/api/lms/v1/purchases?customerId={{customer_id}}",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"nams",
+										"api",
+										"lms",
+										"v1",
+										"purchases"
+									],
+									"query": [
+										{
+											"key": "customerId",
+											"value": "{{customer_id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Sep 2021 15:02:27 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"syncStatus\": \"Pending\",\n        \"status\": \"Active\",\n        \"status\": \"Active\",\n        \"product\": {\n            \"productType\": \"On-Demand\",\n            \"name\": \"Nimble Data Fundamentals\",\n            \"id\": \"a1Z0R000002KBLPUA4\",\n            \"description\": \"Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.\"\n        },\n        \"id\": \"a1J0R000001qKOdUAM\",\n        \"externalId\": null,\n        \"customerId\": \"0011900001EJGj3AAH\",\n        \"customerId\": \"0011900001EJGj3AAH\",\n        \"completionStatus\": \"In Progress\"\n    }\n]"
 						}
 					]
 				},
@@ -741,7 +874,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"syncStatus\": \"Success\",\n    \"product\": {\n        \"productType\": \"On-Demand\",\n        \"name\": \"Nimble Communication Strategies\",\n        \"id\": \"a1Z0R000002KBLLUA4\",\n        \"description\": \"Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.\"\n    },\n    \"id\": \"a1J0R000001qKOcUAM\",\n    \"externalId\": null,\n    \"completionStatus\": \"In Progress\"\n}"
+							"body": "{\n    \"syncStatus\": \"Success\",\n        \"status\": \"Active\",\n    \"product\": {\n        \"productType\": \"On-Demand\",\n        \"name\": \"Nimble Communication Strategies\",\n        \"id\": \"a1Z0R000002KBLLUA4\",\n        \"description\": \"Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.\"\n    },\n    \"id\": \"a1J0R000001qKOcUAM\",\n    \"externalId\": null,\n        \"customerId\": \"0011900001EJGj3AAH\",\n    \"completionStatus\": \"In Progress\"\n}"
 						}
 					]
 				},
@@ -765,7 +898,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"completionStatus\": \"In Progress\",\n    \"syncStatus\": \"Success\",\n    \"externalId\": \"001931414\"\n}",
+							"raw": "{\n    \"completionStatus\": \"In Progress\",\n    \"syncStatus\": \"Success\",\n        \"status\": \"Active\",\n    \"externalId\": \"001931414\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
