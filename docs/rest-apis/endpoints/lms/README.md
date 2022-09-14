@@ -86,6 +86,7 @@ Sample response:
 [
   {
     "syncStatus": "Success",
+    "status": "Active",
     "product": {
       "productType": "On-Demand",
       "name": "Nimble Communication Strategies",
@@ -94,10 +95,12 @@ Sample response:
     },
     "id": "a1J0R000001qKOcUAM",
     "externalId": null,
+    "customerId": "0011900001EJGj3AAH",
     "completionStatus": "In Progress"
   },
   {
     "syncStatus": "Pending",
+    "status": "Active",
     "product": {
       "productType": "On-Demand",
       "name": "Nimble Data Fundamentals",
@@ -106,6 +109,7 @@ Sample response:
     },
     "id": "a1J0R000001qKOdUAM",
     "externalId": null,
+    "customerId": "0011900001EJGj3AAH",
     "completionStatus": "In Progress"
   }
 ]
@@ -115,6 +119,19 @@ Sample response:
 
 To filter the purchases being retrieved to those only updated
 since a specific date, you can provide a `lastUpdated` URL
+parameter in the request to the `/purchases` endpoint.
+
+Use the `yyyy-MM-ddTHH:mm:ss.SSS+/-HH:mm` or `yyyy-MM-ddTHH:mm:ss.SSSZ` format.
+
+Example: `/purchases?lastUpdated=2021-10-10T07:00:00Z`
+
+ℹ️ [More info](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_valid_date_formats.htm)
+on Salesforce Datetime formatting for REST.
+
+#### LMS Purchases by Customer Id
+
+To filter the purchases being retrieved to those purchased by
+a specific customer, you can provide a `customerId` URL
 parameter in the request to the `/purchases` endpoint.
 
 Use the `yyyy-MM-ddTHH:mm:ss.SSS+/-HH:mm` or `yyyy-MM-ddTHH:mm:ss.SSSZ` format.
@@ -134,6 +151,7 @@ Sample response:
 ```json
 {
   "syncStatus": "Success",
+  "status": "Active",
   "product": {
     "productType": "On-Demand",
     "name": "Nimble Communication Strategies",
@@ -142,6 +160,7 @@ Sample response:
   },
   "id": "a1J0R000001qKOcUAM",
   "externalId": null,
+  "customerId": "0011900001EJGj3AAH",
   "completionStatus": "In Progress"
 }
 ```
@@ -212,6 +231,7 @@ that can be imported into [Postman](https://www.postman.com/) for easy testing.
 
 - `product_id` - An LMS Product Id to verify it exists in the `/products` response.
 - `last_updated_date` - Date to use when calling the `/products` and `/purchases` endpoints for filtering by last updated date.
+- `customer_id` - An Account Id to use when calling the `/purchases` endpoint for filtering by customer.
 - `line_id` - An LMS Line Id to verify it exists in the `/purchases` response.
 
 ### Environment Variables
