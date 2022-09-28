@@ -134,12 +134,7 @@ To filter the purchases being retrieved to those purchased by
 a specific customer, you can provide a `customerId` URL
 parameter in the request to the `/purchases` endpoint.
 
-Use the `yyyy-MM-ddTHH:mm:ss.SSS+/-HH:mm` or `yyyy-MM-ddTHH:mm:ss.SSSZ` format.
-
-Example: `/purchases?lastUpdated=2021-10-10T07:00:00Z`
-
-ℹ️ [More info](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_valid_date_formats.htm)
-on Salesforce Datetime formatting for REST.
+Example: `/purchases?customerId=0011900001EJGj3AAH`
 
 #### Single LMS Purchase
 
