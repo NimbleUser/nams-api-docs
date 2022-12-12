@@ -618,6 +618,9 @@ article ol > li:before {
 }
 
 /* Table of Content Overrides */
+.page_toc {
+  display: none;
+}
 .page_toc div[class^="lv"] a {
   color: #4a5568 !important;
 }
