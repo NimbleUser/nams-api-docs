@@ -64,7 +64,7 @@ We want to create create a search experience where users are able to search for 
          * @throws ArgumentNullException if req is null.
          */
         public override Object getData(Request req) {
-            NC.ArgumentNullException.throwIfNull(req, REQUEST_PARAM);\
+            NC.ArgumentNullException.throwIfNull(req, REQUEST_PARAM);
             return new List<NU__Order__c > { new NU__Order__c() };
         }
     }
