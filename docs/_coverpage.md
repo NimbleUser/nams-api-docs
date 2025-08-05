@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="Nimble AMS Logo" width="400px" src="_media/cb-nimbleams-logo.png" />
+    <img alt="Nimble AMS Logo" width="400px" src="_media/nimbleams-logo.png" />
 </p>
 
 <h1>Developer Documentation</h1>
